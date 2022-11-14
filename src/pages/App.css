@@ -1,0 +1,42 @@
+:root{
+    --darkest-blue: #388087;
+    --white: #f6f6f2;
+    --lightest-blue: #badfe7;
+    --mid-blue: #6fb3b8;
+    --greenish-blue: #c2edce;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Aquire';
+    src: url('./fontsFiles/Aquire-BW0ox.otf');
+}
+@font-face {
+    font-family: 'AquireBold';
+    src: url('./fontsFiles/AquireBold-8Ma60.otf');
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('./fontsFiles/RobotoSlab-ExtraLight.ttf');
+}
+@font-face {
+    font-family: 'Prototype';
+    src: url('./fontsFiles/Prototype.ttf');
+}
+@font-face {
+    font-family: 'Ethos';
+    src: url('./fontsFiles/ethnocentric\ rg.otf');
+}
+@font-face {
+    font-family: 'Patrick';
+    src: url('./fontsFiles/PatrickHand-Regular.ttf');
+}
+
+body{
+    background: var(--white);
+}

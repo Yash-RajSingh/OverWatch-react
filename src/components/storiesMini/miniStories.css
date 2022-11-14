@@ -1,0 +1,59 @@
+.miniStoriesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.container-heading {
+  font-size: 2rem;
+  font-family: "Ethos";
+  letter-spacing: 0.5px;
+}
+.miniStoryCard {
+  border: 0.25px solid rgba(0, 0, 0, 0.381);
+  width: 30rem;
+  padding: 1rem;
+  background-color: var(--lightest-blue);
+  margin-top: 2%;
+  border-radius: 4px;
+}
+
+.subInfoWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.author {
+  font-size: 2rem;
+  font-family: "Prototype";
+  letter-spacing: 1px;
+}
+
+.at-icon {
+  height: 12px;
+  float: left;
+}
+.subInfo {
+  font-size: 0.9rem;
+  font-family: "Prototype";
+  font-weight: 0;
+  margin-top: 2%;
+}
+
+.story {
+  margin-top: 2%;
+  font-family: "Roboto";
+  font-weight: 600;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+.posted-on {
+  text-align: right;
+  font-size: 0.9rem;
+  font-family: "Prototype";
+  font-weight: 0;
+  margin-top: 3%;
+}

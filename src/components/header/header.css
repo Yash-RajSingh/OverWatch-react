@@ -1,0 +1,11 @@
+.header{
+    width: 100%;
+    /* border: 1px solid black; */
+}
+.header-title{
+    font-size: 3rem;
+    text-align: center;
+    line-height: 1.25;
+    font-family: 'AquireBold';
+    color: var(--darkest-blue);
+}
