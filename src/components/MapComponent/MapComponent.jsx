@@ -5,6 +5,12 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setZoneData } from "../../redux/actions/dataActions";
 import getAllZones from "../../hooks/getAllZones";
+import Pin from '../../assets/danger-pin.png'
+import L from 'leaflet'
+const curtomIcon = new L.icon({
+  iconUrl: Pin,
+  iconSize: [30,30]
+})
 
 const MapComponent = () => {
   const update = useSelector((state) => state.sidebar.update);
@@ -27,7 +33,7 @@ const MapComponent = () => {
         <MapContainer
           center={[20.5937, 78.9629]}
           zoom={4.5}
-          scrollWheelZoom={false}
+          scrollWheelZoom={true}
           zoomOffset={-10}
           style={{ height: "100%", width: "100%", marginTop:"2%", borderRadius:"10px", border:"1px solid rgba(0,0,0,0.5)" }}
         >
@@ -37,7 +43,7 @@ const MapComponent = () => {
           />
           {zoneData.length > 0 && zoneData.map((element, index)=>{
             return (
-              <Marker position={[parseFloat(element.latitude), parseFloat(element.longitude)]} key={"marker"+index}>
+              <Marker icon={curtomIcon} position={[parseFloat(element.latitude), parseFloat(element.longitude)]} key={"marker"+index}>
                 <Popup>{element.loc_name}</Popup>
               </Marker>
             );
