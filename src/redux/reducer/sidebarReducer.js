@@ -1,7 +1,8 @@
-import { TOGGLE_SIDEBAR } from "../actions/sidebarAction";
+import { TOGGLE_SIDEBAR, TOGGLE_UPDATE } from "../actions/sidebarAction";
 
 const initialState = {
   isOpen: false,
+  update: false,
 };
 
 const sidebarReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const sidebarReducer = (state = initialState, action) => {
       return {
         ...state,
         isOpen: action.payload,
+      };
+    case TOGGLE_UPDATE:
+      return {
+        ...state,
+        update: !state.update,
       };
     default:
       return state;
