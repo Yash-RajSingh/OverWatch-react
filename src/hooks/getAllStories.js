@@ -1,5 +1,5 @@
-const getCounterStats = async () => {
-  const BaseUrl = import.meta.env.VITE_APP_STATS_COUNT_URL;
+const getAllStories = async () => {
+  const BaseUrl = import.meta.env.VITE_APP_GET_ALL_STORIES_URL;
   try {
     const request = await fetch(BaseUrl, {
       method: "GET",
@@ -12,4 +12,4 @@ const getCounterStats = async () => {
   }
 };
 
-export default getCounterStats;
+export default getAllStories;

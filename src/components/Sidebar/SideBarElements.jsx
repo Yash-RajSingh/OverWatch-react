@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const SidebarContainer = styled.div`
-  background: ${(props) =>
-    props.color ? "var(--dark-pink)" : "var(--white)"};
+  background: ${(props) => (props.color ? "var(--dark-pink)" : "var(--white)")};
   width: ${(props) => (props.size ? "15rem" : "3.5rem")};
   height: 100vh;
   padding: 1rem;
   transition: all 400ms;
-  position: fixed;  
+  position: fixed;
+  border-radius: 0 10px 10px 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const SideBarWrapper = styled.div`

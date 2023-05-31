@@ -1,9 +1,5 @@
 const StoriesPage = () => {
-  return ( 
-    <>
-    
-    </>
-   );
-}
- 
+  return <></>;
+};
+
 export default StoriesPage;

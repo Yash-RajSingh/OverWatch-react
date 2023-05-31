@@ -6,7 +6,7 @@ const Info = () => {
     <>
       <InfoContainer>
         <Square />
-        <Square color/>
+        <Square color />
         <InfoHeading>
           Safety in Your Hands: Experience the Next Generation Public Safety
           Solution.
@@ -20,6 +20,6 @@ const Info = () => {
       <StatCounter />
     </>
   );
-}
- 
+};
+
 export default Info;

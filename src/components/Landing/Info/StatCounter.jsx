@@ -27,22 +27,27 @@ const Count = styled.p`
 
 const StatCounter = () => {
   const update = useSelector((state) => state.sidebar.update);
-  const [userCounter, setuserCounter] = useState(0);
+  const [userCounter, setUserCounter] = useState(0);
   const [storiesCounter, setStoriesCounter] = useState(0);
   const [zonesCounter, setZonesCounter] = useState(0);
-  const [data, setData] = useState(false);
+  const [data, setData] = useState(null);
   useEffect(() => {
-    (async()=>{
-      const request = await getCounterStats()
+    (async () => {
+      const request = await getCounterStats();
       const response = await request;
-      setData(response)
-    })()
-  },[update]);
-  if(data !== false){
-    userCounter < data.users_count && setTimeout(() => setuserCounter(userCounter + 1), 50);
-    storiesCounter < data.stories_count && setTimeout(() => setStoriesCounter(storiesCounter + 1), 50);
-    zonesCounter < data.zones_count && setTimeout(() => setZonesCounter(zonesCounter + 1), 50);
-  }
+      setData(response);
+    })();
+  }, [update]);
+  useEffect(() => {
+    if (data !== null) {
+      userCounter < data.users_count &&
+        setTimeout(() => setUserCounter(userCounter + 1), 50);
+      storiesCounter < data.stories_count &&
+        setTimeout(() => setStoriesCounter(storiesCounter + 1), 50);
+      zonesCounter < data.zones_count &&
+        setTimeout(() => setZonesCounter(zonesCounter + 1), 50);
+    }
+  }, [data, userCounter, storiesCounter, zonesCounter]);
   return (
     <>
       <CounterContainer>
