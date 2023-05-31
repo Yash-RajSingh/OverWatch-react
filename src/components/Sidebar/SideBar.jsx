@@ -47,8 +47,8 @@ const MenuItems = [
   },
 ];
 
-const SidebarItem = ({ props }) => { 
-  let navigate = useNavigate()
+const SidebarItem = ({ props }) => {
+  let navigate = useNavigate();
   return (
     <>
       <SidebarItemWrapper>
@@ -73,8 +73,8 @@ const SideBar = () => {
             <MenuIcon
               src={isOpen ? MenuLight : MenuDark}
               onClick={() => {
-                setIsOpen(!isOpen)
-                dispatch(toggleSidebar(!isOpen))
+                setIsOpen(!isOpen);
+                dispatch(toggleSidebar(!isOpen));
               }}
             />
           </IconWrapper>

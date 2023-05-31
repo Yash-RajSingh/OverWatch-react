@@ -1,9 +1,5 @@
 const ProfilePage = () => {
-  return ( 
-    <>
-    
-    </>
-   );
-}
- 
+  return <></>;
+};
+
 export default ProfilePage;

@@ -1,20 +1,20 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const InfoContainer = styled.div`
   /* border: 1px solid black; */
   margin-top: 10%;
   margin-left: auto;
-`
+`;
 
 export const InfoHeading = styled.p`
   font-size: 2.5rem;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   text-align: center;
   width: 70%;
   margin: 0 auto;
   font-weight: 600;
   line-height: 1.3;
-`
+`;
 
 export const InfoText = styled.p`
   color: gray;

@@ -1,9 +1,5 @@
 const InfoPage = () => {
-  return ( 
-    <>
-    
-    </>
-   );
-}
- 
+  return <></>;
+};
+
 export default InfoPage;
