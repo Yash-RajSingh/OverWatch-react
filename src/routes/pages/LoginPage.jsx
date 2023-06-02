@@ -1,17 +1,17 @@
-import Profile from "../../components/Profile/Profile";
 import Layout from "../../components/Layout/Layout";
+import Login from "../../components/Login/Login";
 import { useEffect } from "react";
-const ProfilePage = () => {
+const LoginPage = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
   return (
     <>
       <Layout>
-        <Profile />
+        <Login />
       </Layout>
     </>
   );
 };
 
-export default ProfilePage;
+export default LoginPage;

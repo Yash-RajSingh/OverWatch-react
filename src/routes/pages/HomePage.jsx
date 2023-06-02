@@ -12,7 +12,6 @@ import About from "../../components/Landing/About/About";
 
 const HomePage = () => {
   const update = useSelector((state) => state.sidebar.update);
-  const update2 = useSelector((state) => state.map.storieseData);
   const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
@@ -27,12 +26,14 @@ const HomePage = () => {
     (async () => {
       const request = await getAllStories();
       const response = await request;
-      dispatch(setStoriesData(response.data));
-      // if (response?.status === 200) {
-      //   console.log("herer",update2)
-      // }
+      if (response?.status === 200) {
+        dispatch(setStoriesData(response.data));
+      }
     })();
   }, [update]);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
   return (
     <>
       <Layout>

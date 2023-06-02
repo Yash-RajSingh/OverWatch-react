@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../../redux/actions/sidebarAction";
@@ -65,6 +65,10 @@ const SideBar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(isSidebarOpen);
+  useEffect(() => {
+    setIsOpen(false);
+    dispatch(toggleSidebar(false));
+  }, [window.location.href]);
   return (
     <>
       <SidebarContainer color={isOpen} size={isOpen}>

@@ -6,7 +6,6 @@ const Header = () => {
       <HeaderContainer>
         <Heading>OverWatch</Heading>
       </HeaderContainer>
-      `
     </>
   );
 };
