@@ -3,6 +3,7 @@ import StoryCard from "./StoryCard/StoryCard";
 import styled from "styled-components";
 import { MapContainerHeading } from "../MapComponent/MapComponentElements";
 import StoryModal from "./StoryModal/StoryModal";
+import { useEffect, useState } from "react";
 const StoriesContainer = styled.div`
   margin-top: 10%;
   /* border: 1px solid black; */
@@ -12,7 +13,15 @@ const StoriesHeading = styled(MapContainerHeading)``;
 
 const StoriesSection = () => {
   const storiesData = useSelector((state) => state.map.storiesData);
-  // console.log(storiesData)
+  const update = useSelector((state) => state.sidebar.update);
+  const [count, setCount] = useState(4);
+  useEffect(() => {
+    if (!!storiesData.length > 0) {
+      !window.location.href.includes("stories")
+        ? setCount(4)
+        : setCount(storiesData.length);
+    }
+  }, [window.location.href, update]);
   return (
     <>
       <StoriesContainer>
@@ -20,7 +29,7 @@ const StoriesSection = () => {
         <StoryModal />
         {!!storiesData.length > 0 &&
           storiesData
-            .slice(0, 4)
+            .slice(0, count)
             .map((element, index) => (
               <StoryCard data={element} key={"storycard" + index} />
             ))}
