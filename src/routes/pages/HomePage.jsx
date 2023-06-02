@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getAllZones from "../../hooks/getAllZones";
 import getAllStories from "../../hooks/getAllStories";
 import { setZoneData, setStoriesData } from "../../redux/actions/dataActions";
+import About from "../../components/Landing/About/About";
 
 const HomePage = () => {
   const update = useSelector((state) => state.sidebar.update);
@@ -39,6 +40,7 @@ const HomePage = () => {
         <Info />
         <MapComponent />
         <StoriesSection />
+        <About />
       </Layout>
     </>
   );

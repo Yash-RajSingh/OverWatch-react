@@ -25,6 +25,7 @@ export const LandingDescription = styled.p`
   font-family: "Poppins";
   margin-top: 3%;
   color: gray;
+  width: 90%;
 `;
 export const ArrowImage = styled.img`
   width: 8rem;
@@ -48,4 +49,12 @@ export const LandingImage = styled.img`
   width: 45%;
   margin-top: ${(props) => props.top};
   border-radius: 1rem;
+`;
+export const VectorImage = styled.img`
+  width: 3.5rem;
+  position: absolute;
+  border-radius: 5px;
+  border: 2px solid var(--light-pink);
+  margin-top: ${(props) => props.top};
+  right: ${(props) => props.right};
 `;
