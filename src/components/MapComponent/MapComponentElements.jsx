@@ -12,7 +12,7 @@ export const MapWrapper = styled.div`
 `;
 export const MapContainerHeading = styled.p`
   font-size: 2.5rem;
-  font-family: "Nunito";
+  font-family: "Oswald";
   font-weight: 600;
   /* margin-left: -3.5rem; */
 `;
