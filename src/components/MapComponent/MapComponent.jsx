@@ -17,22 +17,21 @@ import L from "leaflet";
 import getLocationName from "../../hooks/getLocationName";
 import addZone from "../../hooks/addZone";
 import { toggleUpdate } from "../../redux/actions/sidebarAction";
-
+import { getCookies } from "../../hooks/cookies";
 const curtomIcon = new L.icon({
   iconUrl: Pin,
   iconSize: [30, 30],
 });
 
 const LocationMarker = ({ props }) => {
+  const auth = JSON.parse(getCookies({name :"authState"})) || useSelector((state) => state.auth.authStatus);
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InR0IiwidWlkIjoiYjdkYTI1ZjctNzdlNS00N2QwLThiYzItODU3YWFjZGRiZGNjIiwiZXhwIjoxNjg2Mjc1MzQyfQ.Q9K77NibP6KnTVvbQGQlGqb1n_5i7MrZ-jywYDC8iB0";
       (async () => {
         const request = await getLocationName(lat, lng);
         if (request?.status === 200) {
-          const addingZone = await addZone(lat, lng, request.data.city, token);
+          const addingZone = await addZone(lat, lng, request.data.city, auth.token);
           if (addingZone?.status === 200) {
             console.log(addingZone);
             props.dispatch(toggleUpdate(!props.update));

@@ -11,7 +11,7 @@ const verifyInput = (story, incident_date, location, anonymityCheck) => {
       message: "You can only add story upto 1000 words.",
     };
   }
-  const anonymity = anonymityCheck ? 1 : 0;
+  const anonymity = anonymityCheck ? "1" : "0";
   return {
     status: 200,
     data: {

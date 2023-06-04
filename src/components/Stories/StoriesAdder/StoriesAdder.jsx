@@ -16,9 +16,10 @@ import verifyInput from "../../../hooks/verifyInput";
 import addStory from "../../../hooks/addStory";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleUpdate } from "../../../redux/actions/sidebarAction";
-
+import { getCookies } from "../../../hooks/cookies";
 const StoriesAdder = () => {
   const update = useSelector((state) => state.sidebar.update);
+  const auth = JSON.parse(getCookies({name :"authState"})) || useSelector((state) => state.auth.authStatus);
   const storyRef = useRef();
   const dateRef = useRef();
   const locationRef = useRef();
@@ -47,8 +48,6 @@ const StoriesAdder = () => {
               size={"8rem"}
               onClick={async (e) => {
                 e.preventDefault();
-                const token =
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InR0IiwidWlkIjoiYjdkYTI1ZjctNzdlNS00N2QwLThiYzItODU3YWFjZGRiZGNjIiwiZXhwIjoxNjg2Mjc1MzQyfQ.Q9K77NibP6KnTVvbQGQlGqb1n_5i7MrZ-jywYDC8iB0";
                 var check = verifyInput(
                   storyRef.current.value,
                   dateRef.current.value,
@@ -56,8 +55,8 @@ const StoriesAdder = () => {
                   anonymousCheckRef.current.checked
                 );
                 if (check.status === 200) {
-                  const request = await addStory(check.data, token);
-                  if (request.status === 200) {
+                  const request = await addStory(check?.data, auth.token);
+                  if (request?.status === 200) {
                     dispatch(toggleUpdate(!update));
                     storyRef.current.value = "";
                     dateRef.current.value = "";

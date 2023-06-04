@@ -1,19 +1,18 @@
-const addStory = async (data, token) => {
-  const BaseUrl = import.meta.env.VITE_APP_ADD_STORY_URL;
+const useLogin = async (email, password) => {
+  const BaseUrl = import.meta.env.VITE_APP_LOGIN_URL;
   try {
     const request = await fetch(BaseUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...data, token }),
+      body: JSON.stringify({ email, password }),
     });
     const response = await request.json();
-    console.log(response)
     return response;
   } catch (err) {
     console.log(err);
   }
 };
 
-export default addStory;
+export default useLogin;
