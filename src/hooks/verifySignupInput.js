@@ -30,8 +30,8 @@ const verifySignupInput = (name, email, password, confirmPassword) => {
     };
   }
   return {
-    status: 200
-  }
+    status: 200,
+  };
 };
 
 export default verifySignupInput;

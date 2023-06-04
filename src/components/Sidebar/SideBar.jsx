@@ -65,7 +65,9 @@ const SidebarItem = ({ props }) => {
 
 const SideBar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
-  const auth = JSON.parse(getCookies({name :"authState"})) || useSelector((state) => state.auth.authStatus);
+  const auth =
+    JSON.parse(getCookies({ name: "authState" })) ||
+    useSelector((state) => state.auth.authStatus);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(isSidebarOpen);
   const [isLogin, setIsLogin] = useState(false);
@@ -76,8 +78,8 @@ const SideBar = () => {
     window.location.href.includes("login")
       ? setIsLogin(false)
       : setIsLogin(true);
-    if(auth !== false){
-      setIsLogin(false)
+    if (auth !== false) {
+      setIsLogin(false);
     }
   }, [window.location.href]);
   return (

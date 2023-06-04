@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { setAuthData } from "../../redux/actions/authActions";
 import useLogin from "../../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
-import {createCookie} from '../../hooks/cookies'
+import { createCookie } from "../../hooks/cookies";
 const Login = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Login = () => {
       );
       if (request.status === 200) {
         toast.success(request.message);
-        setShowSignup(false)
+        setShowSignup(false);
         signupUsernameRef.current.value = "";
         signupEmailRef.current.value = "";
         signupPasswordRef.current.value = "";
@@ -64,18 +64,17 @@ const Login = () => {
       return;
     }
     const request = await useLogin(email, password);
-    if(request.status === 200){
-      toast.success(request.message)
-      dispatch(setAuthData(request))
+    if (request.status === 200) {
+      toast.success(request.message);
+      dispatch(setAuthData(request));
       createCookie({
         name: "authState",
         value: JSON.stringify(request),
         validDays: 7,
       });
       setTimeout(() => navigate("/"), 1500);
-    }
-    else{
-      toast.error(request?.message)
+    } else {
+      toast.error(request?.message);
     }
     setIsLoading(false);
   };

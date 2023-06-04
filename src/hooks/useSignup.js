@@ -12,7 +12,7 @@ const useSignup = async (username, email, password) => {
     return response;
   } catch (err) {
     console.log(err);
-  }  
-}
- 
+  }
+};
+
 export default useSignup;

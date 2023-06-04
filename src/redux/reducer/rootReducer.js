@@ -6,7 +6,7 @@ import authReducer from "./authReducer";
 const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   map: mapReducer,
-  auth: authReducer
+  auth: authReducer,
 });
 
 export default rootReducer;

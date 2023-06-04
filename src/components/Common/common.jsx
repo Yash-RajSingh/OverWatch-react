@@ -2,7 +2,8 @@ import styled from "styled-components";
 export const Button = styled.button`
   box-shadow: none;
   border: none;
-  background: ${(props) => (props.disabled ? "var(--grey)" : "var(--dark-pink)")};
+  background: ${(props) =>
+    props.disabled ? "var(--grey)" : "var(--dark-pink)"};
   color: var(--white);
   width: ${(props) => (props.size ? props.size : "100%")};
   padding: 0.375rem 0.75rem;

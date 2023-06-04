@@ -19,7 +19,9 @@ import { toggleUpdate } from "../../../redux/actions/sidebarAction";
 import { getCookies } from "../../../hooks/cookies";
 const StoriesAdder = () => {
   const update = useSelector((state) => state.sidebar.update);
-  const auth = JSON.parse(getCookies({name :"authState"})) || useSelector((state) => state.auth.authStatus);
+  const auth =
+    JSON.parse(getCookies({ name: "authState" })) ||
+    useSelector((state) => state.auth.authStatus);
   const storyRef = useRef();
   const dateRef = useRef();
   const locationRef = useRef();

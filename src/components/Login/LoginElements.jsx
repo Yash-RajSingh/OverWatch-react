@@ -34,10 +34,10 @@ export const LoginLabel = styled.p`
   color: black;
   font-size: 1.5rem;
   line-height: 1.2;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-weight: 600;
   margin-top: 5%;
-`
+`;
 
 export const LoginInput = styled.input`
   color: #172b4d;
@@ -62,9 +62,9 @@ export const LoginInput = styled.input`
 
 export const InfoWrapper = styled.div`
   text-align: center;
-`
+`;
 
 export const Link = styled.span`
   color: var(--dark-pink);
   cursor: pointer;
-`
+`;

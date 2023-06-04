@@ -24,14 +24,21 @@ const curtomIcon = new L.icon({
 });
 
 const LocationMarker = ({ props }) => {
-  const auth = JSON.parse(getCookies({name :"authState"})) || useSelector((state) => state.auth.authStatus);
+  const auth =
+    JSON.parse(getCookies({ name: "authState" })) ||
+    useSelector((state) => state.auth.authStatus);
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
       (async () => {
         const request = await getLocationName(lat, lng);
         if (request?.status === 200) {
-          const addingZone = await addZone(lat, lng, request.data.city, auth.token);
+          const addingZone = await addZone(
+            lat,
+            lng,
+            request.data.city,
+            auth.token
+          );
           if (addingZone?.status === 200) {
             console.log(addingZone);
             props.dispatch(toggleUpdate(!props.update));
