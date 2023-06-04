@@ -6,6 +6,7 @@ import store from "../redux/store/store";
 import StoriesPage from "./pages/StoriesPage";
 import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (

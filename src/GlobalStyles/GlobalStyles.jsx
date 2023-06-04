@@ -9,6 +9,7 @@ html{
     --mid-pink: #FF93B5;
     --light-purple: #F8F6FC;
     --dark-purple: #503C76;
+    --grey: #5e6c84;
   }
   *{
     padding: 0;

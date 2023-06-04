@@ -12,6 +12,7 @@ import {
   SidebarItemContainer,
   SidebarItemWrapper,
 } from "./SideBarElements";
+import { Button } from "../Common/common";
 import MenuLight from "../../assets/menu-white.svg";
 import MenuDark from "../../assets/menu-black.svg";
 import Home from "../../assets/home.svg";
@@ -19,6 +20,7 @@ import Alert from "../../assets/alert.svg";
 import Info from "../../assets/info.svg";
 import Post from "../../assets/send.svg";
 import Post2 from "../../assets/book.svg";
+import { getCookies } from "../../hooks/cookies";
 const MenuItems = [
   {
     name: "Home",
@@ -63,11 +65,22 @@ const SidebarItem = ({ props }) => {
 
 const SideBar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
+  const auth =
+    JSON.parse(getCookies({ name: "authState" })) ||
+    useSelector((state) => state.auth.authStatus);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(isSidebarOpen);
+  const [isLogin, setIsLogin] = useState(false);
+  let navigate = useNavigate();
   useEffect(() => {
     setIsOpen(false);
     dispatch(toggleSidebar(false));
+    window.location.href.includes("login")
+      ? setIsLogin(false)
+      : setIsLogin(true);
+    if (auth !== false) {
+      setIsLogin(false);
+    }
   }, [window.location.href]);
   return (
     <>
@@ -83,11 +96,24 @@ const SideBar = () => {
             />
           </IconWrapper>
           {isOpen && (
-            <SidebarItemContainer>
-              {MenuItems.map((element, index) => (
-                <SidebarItem props={element} key={"SidebarItem" + index} />
-              ))}
-            </SidebarItemContainer>
+            <>
+              <SidebarItemContainer>
+                {MenuItems.map((element, index) => (
+                  <SidebarItem props={element} key={"SidebarItem" + index} />
+                ))}
+              </SidebarItemContainer>
+              {isLogin && (
+                <Button
+                  top={"50%"}
+                  style={{
+                    background: "var(--mid-pink)",
+                  }}
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </Button>
+              )}
+            </>
           )}
         </SideBarWrapper>
       </SidebarContainer>
