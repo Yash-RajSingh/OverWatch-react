@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { MapContainerHeading } from "../MapComponent/MapComponentElements";
 import StoryModal from "./StoryModal/StoryModal";
 import { useEffect, useState } from "react";
+import AnimationComponent from "../Animation";
 const StoriesContainer = styled.div`
   margin-top: 10%;
   /* border: 1px solid black; */
@@ -24,16 +25,18 @@ const StoriesSection = () => {
   }, [window.location.href, update]);
   return (
     <>
-      <StoriesContainer>
-        <StoriesHeading>Stories</StoriesHeading>
-        <StoryModal />
-        {!!storiesData.length > 0 &&
-          storiesData
-            .slice(0, count)
-            .map((element, index) => (
-              <StoryCard data={element} key={"storycard" + index} />
-            ))}
-      </StoriesContainer>
+      <AnimationComponent>
+        <StoriesContainer>
+          <StoriesHeading>Stories</StoriesHeading>
+          <StoryModal />
+          {!!storiesData.length > 0 &&
+            storiesData
+              .slice(0, count)
+              .map((element, index) => (
+                <StoryCard data={element} key={"storycard" + index} />
+              ))}
+        </StoriesContainer>
+      </AnimationComponent>
     </>
   );
 };

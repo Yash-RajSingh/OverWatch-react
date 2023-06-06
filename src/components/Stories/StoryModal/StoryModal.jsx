@@ -26,7 +26,7 @@ const StoryModal = () => {
   return (
     <>
       {!!!Array.isArray(storyData) && (
-        <StoryModalContainer>
+        <StoryModalContainer anime={!!!Array.isArray(storyData)}>
           <InputModalCloseButton
             onClick={(e) => {
               dispatch(setActiveStory([]));

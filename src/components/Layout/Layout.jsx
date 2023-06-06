@@ -3,6 +3,7 @@ import SideBar from "../Sidebar/SideBar";
 import Header from "../Header/Header";
 import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
+import Footer from "../Footer/Footer";
 const Pseudobody = styled.div`
   /* border: 1px solid red; */
   width: ${(props) =>
@@ -35,6 +36,7 @@ const Layout = (props) => {
       <Pseudobody size={isSidebarOpen}>
         <Header />
         {props.children}
+        <Footer />
       </Pseudobody>
     </>
   );
