@@ -9,6 +9,7 @@ export const SidebarContainer = styled.div`
   position: fixed;
   border-radius: 0 10px 10px 0;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
+  z-index: 20;
 `;
 
 export const SideBarWrapper = styled.div`
@@ -46,6 +47,29 @@ export const MenuItemLabel = styled.p`
   color: var(--white);
   font-size: 1.25rem;
   transition: all 200ms;
+  &:hover {
+    font-size: 1.5rem;
+  }
+`;
+
+export const UserWrapper = styled.div`
+  /* border: 1px solid black; */
+  margin-top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+`;
+export const ProfileIcon = styled.img`
+  width: 2.5rem;
+  cursor: pointer;
+`;
+export const UserName = styled.p`
+  color: white;
+  font-family: "Nunito";
+  font-size: 1.25rem;
+  transition: all 200ms;
+  cursor: pointer;
   &:hover {
     font-size: 1.5rem;
   }

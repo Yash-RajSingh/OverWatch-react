@@ -1,7 +1,26 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ProfileImage, UserName } from "../StoryCard/StoryCardElements";
 import { PostInfo } from "../StoryCard/StoryCardElements";
-
+const SlideIn = keyframes`
+from {
+    transform: translateX(100%); /* Initial position */
+    opacity: 0; /* Optional: Add opacity animation */
+  }
+  to {
+    transform: translateX(0); /* Final position */
+    opacity: 1; /* Optional: Add opacity animation */
+  }
+`;
+const SlideOut = keyframes`
+from {
+    transform: translateX(0); /* Initial position */
+    opacity: 1; /* Optional: Add opacity animation */
+  }
+  to {
+    transform: translateX(100%); /* Final position */
+    opacity: 0; /* Optional: Add opacity animation */
+  }
+`;
 export const StoryModalContainer = styled.div`
   min-width: 25%;
   max-width: 25%;
@@ -14,6 +33,9 @@ export const StoryModalContainer = styled.div`
   padding: 1rem 0.5rem 1rem 1rem;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  animation-name: ${(props) => (props.anime ? SlideIn : SlideOut)};
+  animation-duration: 0.35s;
+  animation-timing-function: ease-in-out;
 `;
 export const InputModalCloseButton = styled.div`
   transform: rotate(45deg);

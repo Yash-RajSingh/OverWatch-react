@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import getCounterStats from "../../../hooks/getCounterStats";
 import { useSelector } from "react-redux";
+import AnimationComponent from "../../Animation";
 const CounterContainer = styled.div`
   /* border: 1px solid black; */
   width: 98%;
@@ -50,17 +51,19 @@ const StatCounter = () => {
   }, [data, userCounter, storiesCounter, zonesCounter]);
   return (
     <>
-      <CounterContainer>
-        <CounterColumn>
-          <Count>{userCounter}+</Count>Active Users
-        </CounterColumn>
-        <CounterColumn>
-          <Count>{storiesCounter}+</Count>Stories Shared
-        </CounterColumn>
-        <CounterColumn>
-          <Count>{zonesCounter}+</Count>Zones Alerted
-        </CounterColumn>
-      </CounterContainer>
+      <AnimationComponent>
+        <CounterContainer>
+          <CounterColumn>
+            <Count>{userCounter}+</Count>Active Users
+          </CounterColumn>
+          <CounterColumn>
+            <Count>{storiesCounter}+</Count>Stories Shared
+          </CounterColumn>
+          <CounterColumn>
+            <Count>{zonesCounter}+</Count>Zones Alerted
+          </CounterColumn>
+        </CounterContainer>
+      </AnimationComponent>
     </>
   );
 };

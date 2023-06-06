@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const LandingContainer = styled.div`
   /* border: 1px solid black; */
+  margin-top: 1.5%;
 `;
 
 export const LandingWrapper = styled.div`
