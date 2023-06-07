@@ -7,6 +7,7 @@ import StoriesPage from "./pages/StoriesPage";
 import ProfilePage from "./pages/ProfilePage";
 import LoginPage from "./pages/LoginPage";
 import "react-toastify/dist/ReactToastify.css";
+import InfoPage from "./pages/InfoPage";
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
             <Route exact path="/" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/stories" element={<StoriesPage />} />
-            <Route path="/info" element={<HomePage />} />
+            <Route path="/info" element={<InfoPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
         </Router>

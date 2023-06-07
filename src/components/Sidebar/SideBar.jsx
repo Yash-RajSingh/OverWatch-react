@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleSidebar } from "../../redux/actions/sidebarAction";
+import { toggleSidebar, toggleUpdate } from "../../redux/actions/sidebarAction";
 import {
   IconWrapper,
   MenuIcon,
@@ -23,8 +23,10 @@ import Alert from "../../assets/alert.svg";
 import Info from "../../assets/info.svg";
 import Post from "../../assets/send.svg";
 import Post2 from "../../assets/book.svg";
-import { getCookies } from "../../hooks/cookies";
+import { deleteCookie, getCookies } from "../../hooks/cookies";
 import Profile from "../../assets/profile.webp";
+import { toast } from "react-toastify";
+import { setProfileData } from "../../redux/actions/authActions";
 const MenuItems = [
   {
     name: "Home",
@@ -34,7 +36,7 @@ const MenuItems = [
   {
     name: "Instructions",
     icon: Info,
-    path: "info",
+    path: "/info",
   },
   {
     name: "Unsafe zones",
@@ -53,39 +55,38 @@ const MenuItems = [
   },
 ];
 
-// const SidebarItem = ({ props }) => {
-//   return (
-//     <>
-//       <SidebarItemWrapper>
-//         <MenuItemIcon src={props.element.icon} />
-//         <MenuItemLabel onClick={() => props.navigate(`${props.element.path}`)}>
-//           {props.element.name}
-//         </MenuItemLabel>
-//       </SidebarItemWrapper>
-//     </>
-//   );
-// };
+const SidebarItem = ({ props }) => {
+  let navigate = useNavigate();
+  return (
+    <>
+      <SidebarItemWrapper>
+        <MenuItemIcon src={props?.icon} />
+        <MenuItemLabel onClick={() => navigate(`${props?.path}`)}>
+          {props?.name}
+        </MenuItemLabel>
+      </SidebarItemWrapper>
+    </>
+  );
+};
 
 const SideBar = () => {
   const isSidebarOpen = useSelector((state) => state.sidebar.isOpen);
-  const auth =
-    JSON.parse(getCookies({ name: "authState" })) ||
-    useSelector((state) => state.auth.authStatus);
+  const profileData = useSelector((state) => state.auth.isprofileDataOpen);
+  const update = useSelector((state) => state.sidebar.update);
+  const auth = JSON.parse(getCookies({ name: "authState" }));
   const [isOpen, setIsOpen] = useState(isSidebarOpen);
-  const [isLogin, setIsLogin] = useState(false);
-  let navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true);
   const dispatch = useDispatch();
-  const path = window.location.href;
+  let navigate = useNavigate();
   useEffect(() => {
     setIsOpen(false);
     dispatch(toggleSidebar(false));
-    window.location.href.includes("login")
-      ? setIsLogin(false)
-      : setIsLogin(true);
-    if (auth !== false) {
+    if (window.location.href.includes("login")) {
+      setIsLogin(false);
+    } else {
       setIsLogin(true);
     }
-  }, [path]);
+  }, [window.location.href]);
 
   return (
     <>
@@ -104,32 +105,57 @@ const SideBar = () => {
             <>
               <SidebarItemContainer>
                 {MenuItems.map((element, index) => (
-                  // <SidebarItem props={{element, navigate}} key={"SidebarItem" + index} />
-                  <SidebarItemWrapper>
-                    <MenuItemIcon src={element.icon} />
-                    <MenuItemLabel onClick={() => navigate(`${element.path}`)}>
-                      {element.name}
-                    </MenuItemLabel>
-                  </SidebarItemWrapper>
+                  <SidebarItem props={element} key={"SidebarItem" + index} />
                 ))}
               </SidebarItemContainer>
-              {isLogin ? (
-                <UserWrapper onClick={() => navigate("/profile")}>
-                  <ProfileIcon src={Profile} />
-                  <UserName>{auth.username}</UserName>
-                </UserWrapper>
-              ) : (
-                <UserWrapper>
-                  <Button
-                    size={"85%"}
-                    style={{
-                      background: "var(--mid-pink)",
-                    }}
-                    onClick={() => navigate("/login")}
-                  >
-                    Login
-                  </Button>
-                </UserWrapper>
+            </>
+          )}
+          {isOpen && (
+            <>
+              {isLogin && (
+                <>
+                  {auth ? (
+                    <>
+                      <UserWrapper onClick={() => navigate("/profile")}>
+                        <ProfileIcon src={Profile} />
+                        <UserName>{auth.username}</UserName>
+                      </UserWrapper>
+                      <div style={{textAlign:"center"}}>
+                      <Button
+                        top={"10%"}
+                        size={"90%"}
+                        style={{
+                          background: "var(--mid-pink)",
+                        }}
+                        onClick={()=>{
+                          deleteCookie({name:"authState"})
+                          dispatch(toggleUpdate(!update));
+                          setIsOpen(false);
+                          dispatch(toggleSidebar(false));
+                          dispatch(setProfileData([]));
+                          toast.success("Logged out successfully!")
+                          navigate("/")
+                          // location.reload()
+                        }}
+                      >
+                        Logout
+                      </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <UserWrapper>
+                      <Button
+                        size={"85%"}
+                        style={{
+                          background: "var(--mid-pink)",
+                        }}
+                        onClick={() => navigate("/login")}
+                      >
+                        Login
+                      </Button>
+                    </UserWrapper>
+                  )}
+                </>
               )}
             </>
           )}
