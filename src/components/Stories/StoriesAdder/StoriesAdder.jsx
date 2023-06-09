@@ -70,7 +70,10 @@ const StoriesAdder = () => {
                         dateRef.current.value = "";
                         locationRef.current.value = "";
                         anonymousCheckRef.current.checked = false;
+                        toast.success("Story shared successfully!")
                       }
+                    } else{
+                      toast.warn(check.message)
                     }
                   } else {
                     toast.error(

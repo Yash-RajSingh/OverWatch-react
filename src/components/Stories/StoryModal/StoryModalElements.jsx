@@ -36,6 +36,7 @@ export const StoryModalContainer = styled.div`
   animation-name: ${(props) => (props.anime ? SlideIn : SlideOut)};
   animation-duration: 0.35s;
   animation-timing-function: ease-in-out;
+  overflow: hidden;
 `;
 export const InputModalCloseButton = styled.div`
   transform: rotate(45deg);
@@ -66,11 +67,12 @@ export const StoryModalPostInfo = styled(PostInfo)`
   font-size: 0.7rem;
 `;
 export const StoryDescription = styled.p`
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: black;
   margin-top: 5%;
   font-family: "Poppins";
   font-weight: 400;
   width: 95%;
   overflow-y: auto;
+  max-height: 87%;
 `;
