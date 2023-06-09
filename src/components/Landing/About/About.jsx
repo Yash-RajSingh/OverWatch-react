@@ -32,9 +32,12 @@ const About = () => {
             <AboutContentWrapper>
               <AboutHeading>Let us help each other</AboutHeading>
               <AboutDescription>
-                Welcome to our platform, where safety meets community. We
-                provide a unique space for users to share information about
-                potential risks.
+                Welcome to{" "}
+                <span style={{ fontWeight: 600, color: "black" }}>
+                  OverWatch
+                </span>
+                , where safety meets community. We provide a unique space for
+                users to share information about potential risks.
               </AboutDescription>
               <FeaturesGrid>
                 <FeatureGridItem grid={"1 / 1 / 2 / 2"}>
@@ -52,7 +55,7 @@ const About = () => {
                 <FeatureGridItem grid={"2 / 1 / 3 / 2"}>
                   <FeatureHeading>Safer Navigation</FeatureHeading>
                   <FeatureDescription>
-                    Make informed decisions about our routes and destinations
+                    Make informed decisions about ypur routes and destinations
                   </FeatureDescription>
                 </FeatureGridItem>
                 <FeatureGridItem grid={"2 / 2 / 3 / 3"}>

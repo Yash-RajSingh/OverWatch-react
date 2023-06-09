@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import {MapContainerHeading} from '../MapComponent/MapComponentElements'
+import { MapContainerHeading } from "../MapComponent/MapComponentElements";
 export const ProfileContainer = styled.div`
   /* border: 1px solid black; */
   padding-left: 0.5rem;
-`
+`;
 
 export const ProfileHeaderWrapper = styled.div`
   width: 90%;
@@ -12,27 +12,27 @@ export const ProfileHeaderWrapper = styled.div`
   align-items: flex-start;
   gap: 3%;
   margin-left: 5%;
-  `
+`;
 
 export const ProfileImage = styled.img`
   width: 8rem;
-  `
+`;
 export const ProfileHeaderSubWrapper = styled.div`
-flex-grow: 1;
-`
+  flex-grow: 1;
+`;
 export const UserName = styled.p`
   font-size: 2rem;
-  font-family: 'Nunito';
+  font-family: "Nunito";
   line-height: 1;
-`
+`;
 export const UserEmail = styled.p`
   color: grey;
   font-size: 1.125rem;
-  font-family: 'Poppins';
-`
+  font-family: "Poppins";
+`;
 
 export const InuptField = styled.input.attrs({
-  type:"password"
+  type: "password",
 })`
   color: #172b4d;
   margin-top: ${(props) => (props.top ? props.top : "2%")};
@@ -54,8 +54,8 @@ export const InuptField = styled.input.attrs({
   }
 `;
 
-export const  ProfileZonesWrapper = styled.div`
+export const ProfileZonesWrapper = styled.div`
   /* border: 1px solid black; */
   margin-top: 8%;
-`
-export const ProfileHeading = styled(MapContainerHeading)``
+`;
+export const ProfileHeading = styled(MapContainerHeading)``;

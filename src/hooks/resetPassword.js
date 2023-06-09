@@ -1,4 +1,4 @@
-const resetPassword = async (current_password,new_password, token) => {
+const resetPassword = async (current_password, new_password, token) => {
   const BaseUrl = import.meta.env.VITE_APP_UPDATE_PASSWORD_URL;
   try {
     const request = await fetch(BaseUrl, {
