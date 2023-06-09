@@ -6,6 +6,8 @@ import StoryModal from "./StoryModal/StoryModal";
 import { useEffect, useState } from "react";
 import AnimationComponent from "../Animation";
 import Loader from "../Loader/Loader";
+import getAllStories from "../../hooks/getAllStories";
+import { setStoriesData } from "../../redux/actions/dataActions";
 const StoriesContainer = styled.div`
   margin-top: 10%;
   /* border: 1px solid black; */
@@ -23,6 +25,13 @@ const StoriesSection = () => {
         ? setCount(4)
         : setCount(storiesData.length);
     }
+    (async () => {
+      const request = await getAllStories();
+      const response = await request;
+      if (response?.status === 200) {
+        dispatch(setStoriesData(response.data));
+      }
+    })();
   }, [window.location.href, update]);
   return (
     <>
