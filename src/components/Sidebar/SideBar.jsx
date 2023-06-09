@@ -27,6 +27,8 @@ import { deleteCookie, getCookies } from "../../hooks/cookies";
 import Profile from "../../assets/profile.webp";
 import { toast } from "react-toastify";
 import { setProfileData } from "../../redux/actions/authActions";
+import { useResolvedPath } from "react-router-dom";
+
 const MenuItems = [
   {
     name: "Home",
@@ -42,6 +44,7 @@ const MenuItems = [
     name: "Unsafe zones",
     icon: Alert,
     path: "/",
+    id: "map-component",
   },
   {
     name: "Stories",
@@ -57,11 +60,40 @@ const MenuItems = [
 
 const SidebarItem = ({ props }) => {
   let navigate = useNavigate();
+  const resolvedPath = useResolvedPath("/");
   return (
     <>
       <SidebarItemWrapper>
         <MenuItemIcon src={props?.icon} />
-        <MenuItemLabel onClick={() => navigate(`${props?.path}`)}>
+        <MenuItemLabel
+          onClick={() => {
+            if (resolvedPath.path === "/") {
+              if (props?.id !== undefined) {
+                const expLink = document.getElementById(`${props.id}`);
+                expLink.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                  inline: "center",
+                });
+              }
+            } else {
+              navigate(`${props?.path}`);
+              if (props?.id !== undefined) {
+                const intervalId = setInterval(() => {
+                  const expLink = document.getElementById(`${props.id}`);
+                  if (expLink !== null) {
+                    clearInterval(intervalId);
+                    expLink.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                      inline: "center",
+                    });
+                  }
+                }, 1000);
+              }
+            }
+          }}
+        >
           {props?.name}
         </MenuItemLabel>
       </SidebarItemWrapper>
@@ -118,28 +150,33 @@ const SideBar = () => {
                     <>
                       <UserWrapper onClick={() => navigate("/profile")}>
                         <ProfileIcon src={Profile} />
-                        <UserName>{auth.username}</UserName>
+                        <UserName>
+                          {auth.username.substring(
+                            0,
+                            auth.username.indexOf(" ")
+                          ) || auth.username}
+                        </UserName>
                       </UserWrapper>
-                      <div style={{textAlign:"center"}}>
-                      <Button
-                        top={"10%"}
-                        size={"90%"}
-                        style={{
-                          background: "var(--mid-pink)",
-                        }}
-                        onClick={()=>{
-                          deleteCookie({name:"authState"})
-                          dispatch(toggleUpdate(!update));
-                          setIsOpen(false);
-                          dispatch(toggleSidebar(false));
-                          dispatch(setProfileData([]));
-                          toast.success("Logged out successfully!")
-                          navigate("/")
-                          // location.reload()
-                        }}
-                      >
-                        Logout
-                      </Button>
+                      <div style={{ textAlign: "center" }}>
+                        <Button
+                          top={"10%"}
+                          size={"90%"}
+                          style={{
+                            background: "var(--mid-pink)",
+                          }}
+                          onClick={() => {
+                            deleteCookie({ name: "authState" });
+                            dispatch(toggleUpdate(!update));
+                            setIsOpen(false);
+                            dispatch(toggleSidebar(false));
+                            dispatch(setProfileData([]));
+                            toast.success("Logged out successfully!");
+                            navigate("/");
+                            // location.reload()
+                          }}
+                        >
+                          Logout
+                        </Button>
                       </div>
                     </>
                   ) : (

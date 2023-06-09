@@ -1,5 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { ProfileMapContainer, ProfileZoneListItem,InputModalCloseButton, ProfileZonesContainer, ProfileZonesListWrapper, ZoneName } from "./ProfileZoneElement";
+import {
+  ProfileMapContainer,
+  ProfileZoneListItem,
+  InputModalCloseButton,
+  ProfileZonesContainer,
+  ProfileZonesListWrapper,
+  ZoneName,
+} from "./ProfileZoneElement";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import Pin from "../../../assets/danger-pin.webp";
 import L from "leaflet";
@@ -9,6 +16,8 @@ import deleteZone from "../../../hooks/deleteZone";
 import { toggleUpdate } from "../../../redux/actions/sidebarAction";
 import { toast } from "react-toastify";
 import { Button } from "../../Common/common";
+import Loader from "../../Loader/Loader";
+import { InfoMessage } from "../ProfileStory/ProfileStory";
 
 const curtomIcon = new L.icon({
   iconUrl: Pin,
@@ -18,15 +27,17 @@ const curtomIcon = new L.icon({
 const ProfileZone = () => {
   const profileData = useSelector((state) => state.auth.profileData);
   const update = useSelector((state) => state.sidebar.update);
-  const [mapActiveCenter, setMapActiveCenter] = useState(false)
+  const [mapActiveCenter, setMapActiveCenter] = useState(false);
   const [mapKey, setMapKey] = useState(0);
-  const [mapCenter, setMapCenter] = useState(mapActiveCenter || [20.5937, 78.9629])
-  const auth = JSON.parse(getCookies({name:"authState"}))
+  const [mapCenter, setMapCenter] = useState(
+    mapActiveCenter || [20.5937, 78.9629]
+  );
+  const auth = JSON.parse(getCookies({ name: "authState" }));
   const dispatch = useDispatch();
   useEffect(() => {
     if (mapActiveCenter) {
       setMapCenter(mapActiveCenter);
-    } else{
+    } else {
       setMapCenter([20.5937, 78.9629]);
     }
   }, [mapActiveCenter]);
@@ -39,37 +50,55 @@ const ProfileZone = () => {
     <>
       <ProfileZonesContainer>
         <ProfileZonesListWrapper>
-          {profileData?.zones &&
-            profileData.zones.map((element, index) => {
-              return (
-                <>
-                  <ProfileZoneListItem>
-                    <ZoneName
-                      onClick={() => {
-                        setMapActiveCenter(false)
-                        setMapActiveCenter([
-                          parseFloat(element.latitude),
-                          parseFloat(element.longitude),
-                        ]);
-                      }}
-                    >
-                      {element.loc_name}
-                    </ZoneName>
-                    <InputModalCloseButton onClick={async ()=>{
-                      const request = await deleteZone(element.zuid, auth.token);
-                      const response = await request;
-                      if(response.status === 200){
-                        toast.success(response.message);
-                        dispatch(toggleUpdate(!update));
-                        setMapActiveCenter(false)
-                      } else{
-                        toast.error("Error Deleting zone")
-                      }
-                    }}>+</InputModalCloseButton>
-                  </ProfileZoneListItem>
-                </>
-              );
-            })}
+          {profileData?.zones ? (
+            <>
+              {profileData.zones.length > 0 ? (
+                profileData.zones.map((element, index) => {
+                  return (
+                    <>
+                      <ProfileZoneListItem>
+                        <ZoneName
+                          onClick={() => {
+                            setMapActiveCenter(false);
+                            setMapActiveCenter([
+                              parseFloat(element.latitude),
+                              parseFloat(element.longitude),
+                            ]);
+                          }}
+                        >
+                          {element.loc_name}
+                        </ZoneName>
+                        <InputModalCloseButton
+                          onClick={async () => {
+                            const request = await deleteZone(
+                              element.zuid,
+                              auth.token
+                            );
+                            const response = await request;
+                            if (response.status === 200) {
+                              toast.success(response.message);
+                              dispatch(toggleUpdate(!update));
+                              setMapActiveCenter(false);
+                            } else {
+                              toast.error("Error Deleting zone");
+                            }
+                          }}
+                        >
+                          +
+                        </InputModalCloseButton>
+                      </ProfileZoneListItem>
+                    </>
+                  );
+                })
+              ) : (
+                <InfoMessage>
+                  You haven't marked any location as dangerous yet!
+                </InfoMessage>
+              )}
+            </>
+          ) : (
+            <Loader />
+          )}
         </ProfileZonesListWrapper>
         <ProfileMapContainer>
           <MapContainer
@@ -92,8 +121,10 @@ const ProfileZone = () => {
               <>
                 {mapActiveCenter ? (
                   <>
-                    <Marker icon={curtomIcon} position={mapActiveCenter}>
-                    </Marker>
+                    <Marker
+                      icon={curtomIcon}
+                      position={mapActiveCenter}
+                    ></Marker>
                   </>
                 ) : (
                   <>
@@ -116,15 +147,21 @@ const ProfileZone = () => {
               </>
             )}
           </MapContainer>
-          <div style={{textAlign:"center"}}>
-            <Button top={"2%"} size={"20rem"} onClick={()=>{
-              setMapActiveCenter(false)
-            }}>Reset map view</Button>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              top={"2%"}
+              size={"20rem"}
+              onClick={() => {
+                setMapActiveCenter(false);
+              }}
+            >
+              Reset map view
+            </Button>
           </div>
         </ProfileMapContainer>
       </ProfileZonesContainer>
     </>
   );
-}
- 
+};
+
 export default ProfileZone;

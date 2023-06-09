@@ -5,12 +5,12 @@ export const ProfileZonesContainer = styled.div`
   display: flex;
   gap: 2%;
   margin-top: 2%;
-`
+`;
 
 export const ProfileZonesListWrapper = styled.div`
   /* border: 1px solid blue; */
   width: 30%;
-`
+`;
 export const ProfileZoneListItem = styled.div`
   background: var(--white);
   display: flex;
@@ -23,10 +23,10 @@ export const ProfileZoneListItem = styled.div`
   box-shadow: 0px 2px 3px #00000029;
 `;
 export const ZoneName = styled.p`
-  font-family: 'Nunito';
+  font-family: "Nunito";
   font-size: 1.25rem;
   cursor: pointer;
-`
+`;
 export const InputModalCloseButton = styled.div`
   transform: rotate(45deg);
   float: right;
@@ -39,5 +39,5 @@ export const InputModalCloseButton = styled.div`
 export const ProfileMapContainer = styled.div`
   /* border: 1px solid green; */
   width: 70%;
-  height: ${props => props.height || `70vh`};
-`
+  height: ${(props) => props.height || `70vh`};
+`;

@@ -43,12 +43,12 @@ const Profile = () => {
             userDetail: response.user_details,
             zones: response.zones_details,
           })
-          );
-        } else {
-          toast.error("Error fetching user profile details.");
-        }
-      })();
-    }, [update]);
+        );
+      } else {
+        toast.error("Error fetching user profile details.");
+      }
+    })();
+  }, [update]);
   const handleResetPassword = async () => {
     setIsDisabled(true);
     if (
@@ -110,23 +110,23 @@ const Profile = () => {
             </AnimatedComponent>
           </>
         )}
-        {!!!Array.isArray(profileData) && (
-          <>
-            <AnimatedComponent>
-              <ProfileZonesWrapper>
-                <ProfileHeading>Danger zones by you</ProfileHeading>
-                <ProfileZone />
-              </ProfileZonesWrapper>
-            </AnimatedComponent>
-          </>
-        )}
-        {!!!Array.isArray(profileData) && (
-          <>
-            <AnimatedComponent>
-              <ProfileStory />
-            </AnimatedComponent>
-          </>
-        )}
+        {/* {!!!Array.isArray(profileData) && ( */}
+        <>
+          <AnimatedComponent>
+            <ProfileZonesWrapper>
+              <ProfileHeading>Danger zones by you</ProfileHeading>
+              <ProfileZone />
+            </ProfileZonesWrapper>
+          </AnimatedComponent>
+        </>
+        {/* )} */}
+        {/* {!!!Array.isArray(profileData) && ( */}
+        <>
+          <AnimatedComponent>
+            <ProfileStory />
+          </AnimatedComponent>
+        </>
+        {/* )} */}
       </ProfileContainer>
     </>
   );

@@ -9,7 +9,6 @@ const addStory = async (data, token) => {
       body: JSON.stringify({ ...data, token }),
     });
     const response = await request.json();
-    console.log(response);
     return response;
   } catch (err) {
     console.log(err);

@@ -4,7 +4,7 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  useMap
+  useMap,
 } from "react-leaflet";
 import {
   MapComponentContainer,
@@ -34,7 +34,7 @@ const curtomIcon = new L.icon({
 
 const LocationMarker = ({ props }) => {
   const navigate = useNavigate();
-  const auth = JSON.parse(getCookies({ name: "authState" }))
+  const auth = JSON.parse(getCookies({ name: "authState" }));
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
@@ -62,7 +62,7 @@ const LocationMarker = ({ props }) => {
         toast.error("You need to be logged in to add a danger zone!");
         setTimeout(() => navigate("/login"), 2000);
       }
-      props.setMapActiveCenter(false)
+      props.setMapActiveCenter(false);
     },
   });
 };
@@ -91,16 +91,20 @@ const AddressControl = ({ onSubmit }) => {
 const MapComponent = () => {
   const zoneData = useSelector((state) => state.map.zoneData);
   const update = useSelector((state) => state.sidebar.update);
-  const [mapActiveCenter, setMapActiveCenter] = useState(false)
+  const [mapActiveCenter, setMapActiveCenter] = useState(false);
   const [mapKey, setMapKey] = useState(0);
-  const [mapCenter, setMapCenter] = useState(mapActiveCenter || [20.5937, 78.9629])
+  const [mapCenter, setMapCenter] = useState(
+    mapActiveCenter || [20.5937, 78.9629]
+  );
   const dispatch = useDispatch();
   const mapRef = useRef(null);
   const handleSearchSubmit = (data) => {
-    if(data.data !== undefined){
+    if (data.data !== undefined) {
       setMapActiveCenter([parseFloat(data.data.y), parseFloat(data.data.x)]);
-    } else{
-      toast.warn("Error locating the place. Please search for a relative location")
+    } else {
+      toast.warn(
+        "Error locating the place. Please search for a relative location"
+      );
     }
   };
   useEffect(() => {
@@ -116,7 +120,7 @@ const MapComponent = () => {
   return (
     <>
       <AnimationComponent>
-        <MapComponentContainer>
+        <MapComponentContainer id={"map-component"}>
           <MapContainerHeading>Danger Zones</MapContainerHeading>
           <MapWrapper>
             <MapContainer
@@ -156,7 +160,9 @@ const MapComponent = () => {
                   );
                 })}
               <AddressControl onSubmit={handleSearchSubmit} />
-              <LocationMarker props={{ dispatch, update, setMapActiveCenter }} />
+              <LocationMarker
+                props={{ dispatch, update, setMapActiveCenter }}
+              />
             </MapContainer>
           </MapWrapper>
         </MapComponentContainer>
