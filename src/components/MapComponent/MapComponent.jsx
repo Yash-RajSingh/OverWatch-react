@@ -38,7 +38,7 @@ const LocationMarker = ({ props }) => {
   useMapEvents({
     click(e) {
       const { lat, lng } = e.latlng;
-      if (auth !== false) {
+      if (auth !== false && auth !== null) {
         (async () => {
           const request = await getLocationName(lat, lng);
           if (request?.status === 200) {

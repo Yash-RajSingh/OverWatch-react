@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import StoryCard from "./StoryCard/StoryCard";
 import styled from "styled-components";
 import { MapContainerHeading } from "../MapComponent/MapComponentElements";
@@ -19,6 +19,7 @@ const StoriesSection = () => {
   const storiesData = useSelector((state) => state.map.storiesData);
   const update = useSelector((state) => state.sidebar.update);
   const [count, setCount] = useState(4);
+  const dispatch = useDispatch()
   useEffect(() => {
     if (!!storiesData.length > 0) {
       !window.location.href.includes("stories")
