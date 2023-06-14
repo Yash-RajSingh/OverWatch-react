@@ -22,9 +22,7 @@ import { useNavigate } from "react-router-dom";
 import AnimationComponent from "../../Animation";
 const StoriesAdder = () => {
   const update = useSelector((state) => state.sidebar.update);
-  const auth =
-    JSON.parse(getCookies({ name: "authState" })) ||
-    useSelector((state) => state.auth.authStatus);
+  const auth = JSON.parse(getCookies({ name: "authState" }))
   const storyRef = useRef();
   const dateRef = useRef();
   const locationRef = useRef();
@@ -54,7 +52,7 @@ const StoriesAdder = () => {
               <PostButton
                 size={"8rem"}
                 onClick={async (e) => {
-                  if (auth !== false) {
+                  if (auth !== false && auth !== null) {
                     e.preventDefault();
                     var check = verifyInput(
                       storyRef.current.value,
@@ -70,10 +68,10 @@ const StoriesAdder = () => {
                         dateRef.current.value = "";
                         locationRef.current.value = "";
                         anonymousCheckRef.current.checked = false;
-                        toast.success("Story shared successfully!")
+                        toast.success("Story shared successfully!");
                       }
-                    } else{
-                      toast.warn(check.message)
+                    } else {
+                      toast.warn(check.message);
                     }
                   } else {
                     toast.error(
